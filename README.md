@@ -2,6 +2,27 @@
 
 A simple goal counter for teams. Made with Go, Gale and WebSockets.
 
+## Deploy and run
+
+Clone the repository:
+```bash
+git clone https://github.com/bottyaneu/goalcounter.git
+```
+
+Build the docker image:
+```bash
+docker build -t bottyaneu/goalcounter .
+```
+
+Run the app (the app will be available at `http://localhost:8000`):
+```bash
+docker run -p 8000:3000 bottyaneu/goalcounter
+```
+Note: Add `-d` to run the container in detached mode.
+
+Run the `goalcounter` image:
+
+
 ## HTTP Requests
 
 Get teams `GET /`
@@ -35,6 +56,18 @@ Reset scoreboard `GET /reset`
 ```
 
 ## WS Events
+
+### Connect to the WS Server
+
+```bash
+GET ws://localhost:8000/ws
+```
+(Replace `localhost` with the server's IP address and `8000` with the port)
+With JS (client side):
+```javascript
+const ws = new WebSocket("ws://localhost:8000/ws")
+```
+**Note: Use something similar to vueUse `useWebsocket` to handle the connection.**
 
 ### Ping (keep alive)
 
