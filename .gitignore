@@ -1,0 +1,10 @@
+# Binary files
+bin
+# Env variables
+.env
+.env.*
+!.env*.example
+
+# Editor files
+.idea
+.vscode
