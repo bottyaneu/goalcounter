@@ -11,7 +11,8 @@ import (
 )
 
 func NewApiServer() *gale.Gale {
-	app := gale.New()
+	conf := config.Api()
+	app := gale.New(&conf)
 	server := NewWSServer(app)
 	store := gale.NewMemStorage()
 
@@ -28,6 +29,10 @@ func NewApiServer() *gale.Gale {
 	r.Get("/scoreboard", handlers.HandleGetScoreBoard(store)).Name("scoreboard")
 	// Resets the scoreboard
 	r.Get("/reset", handlers.HandleResetScoreBoard(store, server)).Name("reset")
+
+	if conf.Mode == gale.Development {
+		app.Use(gale.NewUIDevtools())
+	}
 
 	// Dump the routes to the console
 	app.Dump()
